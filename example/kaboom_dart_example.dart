@@ -2,8 +2,8 @@ import 'package:kaboom_dart/kaboom_dart.dart';
 
 void main() async {
   var client = KaboomClient();
-  var r = await client.comics.getComics();
-  r.results?.forEach((element) {
-    print(element.seriesName);
-  });
+  await client.login("demo", "kaboom123");
+  
+  var comic = await client.comics?.updateComic(client.accessToken!, 14, {"publisher_id": "1"});
+  print(comic?.publisher?.name);
 }

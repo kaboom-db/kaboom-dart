@@ -27,6 +27,11 @@ class Publisher {
     data['date_created'] = dateCreated;
     return data;
   }
+
+  @override
+  String toString() {
+    return name!;
+  }
 }
 
 class Character {
@@ -122,6 +127,11 @@ class Character {
     data['date_created'] = dateCreated;
     return data;
   }
+
+  @override
+  String toString() {
+    return name!;
+  }
 }
 
 class VoiceActors {
@@ -167,6 +177,11 @@ class VoiceActors {
     data['date_created'] = dateCreated;
     return data;
   }
+
+  @override
+  String toString() {
+    return name!;
+  }
 }
 
 class Teams {
@@ -207,6 +222,11 @@ class Teams {
     data['logo'] = logo;
     data['date_created'] = dateCreated;
     return data;
+  }
+
+  @override
+  String toString() {
+    return name!;
   }
 }
 
@@ -261,6 +281,11 @@ class Staff {
     data['date_created'] = dateCreated;
     return data;
   }
+
+  @override
+  String toString() {
+    return name!;
+  }
 }
 
 class StaffPosition {
@@ -280,13 +305,18 @@ class StaffPosition {
     data['position'] = position;
     return data;
   }
+
+  @override
+  String toString() {
+    return position!;
+  }
 }
 
 class Issue {
   int? id;
   List<Character>? characters;
   List<Staff>? staff;
-  Series? series;
+  Comic? series;
   Format? format;
   int? issueNumberAbsolute;
   String? issueName;
@@ -323,7 +353,7 @@ class Issue {
       });
     }
     series =
-        json['series'] != null ? Series.fromJson(json['series']) : null;
+        json['series'] != null ? Comic.fromJson(json['series']) : null;
     format = json['format'];
     issueNumberAbsolute = json['issue_number_absolute'];
     issueName = json['issue_name'];
@@ -354,9 +384,14 @@ class Issue {
     data['date_created'] = dateCreated;
     return data;
   }
+
+  @override
+  String toString() {
+    return issueName! + ' ' + issueNumberAbsolute!.toString();
+  }
 }
 
-class Series {
+class Comic {
   int? id;
   Publisher? publisher;
   String? seriesName;
@@ -365,10 +400,10 @@ class Series {
   String? status;
   String? coverImage;
   String? backgroundImage;
-  Float? rating;
+  double? rating;
   String? dateCreated;
 
-  Series(
+  Comic(
       {this.id,
       this.publisher,
       this.seriesName,
@@ -380,7 +415,7 @@ class Series {
       this.rating,
       this.dateCreated});
 
-  Series.fromJson(Map<String, dynamic> json) {
+  Comic.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     publisher = json['publisher'] != null
         ? Publisher.fromJson(json['publisher'])
@@ -411,6 +446,11 @@ class Series {
     data['date_created'] = dateCreated;
     return data;
   }
+
+  @override
+  String toString() {
+    return seriesName!;
+  }
 }
 
 class Format {
@@ -429,5 +469,10 @@ class Format {
     data['id'] = id;
     data['name'] = name;
     return data;
+  }
+
+  @override
+  String toString() {
+    return name!;
   }
 }
