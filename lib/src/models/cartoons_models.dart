@@ -14,11 +14,11 @@ class Location {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['city'] = this.city;
-    data['nation'] = this.nation;
-    data['date_created'] = this.dateCreated;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['city'] = city;
+    data['nation'] = nation;
+    data['date_created'] = dateCreated;
     return data;
   }
 }

@@ -19,12 +19,12 @@ class Publisher {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    data['logo'] = this.logo;
-    data['website'] = this.website;
-    data['date_created'] = this.dateCreated;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['name'] = name;
+    data['logo'] = logo;
+    data['website'] = website;
+    data['date_created'] = dateCreated;
     return data;
   }
 }
@@ -98,28 +98,28 @@ class Character {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    if (this.voiceActors != null) {
-      data['voice_actors'] = this.voiceActors?.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    if (voiceActors != null) {
+      data['voice_actors'] = voiceActors?.map((v) => v.toJson()).toList();
     }
-    if (this.teams != null) {
-      data['teams'] = this.teams?.map((v) => v.toJson()).toList();
+    if (teams != null) {
+      data['teams'] = teams?.map((v) => v.toJson()).toList();
     }
-    data['location_of_operation'] = this.locationOfOperation;
-    data['name'] = this.name;
-    data['alias'] = this.alias;
-    data['image'] = this.image;
-    data['biography'] = this.biography;
-    data['status'] = this.status;
-    data['alignment'] = this.alignment;
-    data['intelligence'] = this.intelligence;
-    data['strength'] = this.strength;
-    data['speed'] = this.speed;
-    data['durability'] = this.durability;
-    data['power'] = this.power;
-    data['combat'] = this.combat;
-    data['date_created'] = this.dateCreated;
+    data['location_of_operation'] = locationOfOperation;
+    data['name'] = name;
+    data['alias'] = alias;
+    data['image'] = image;
+    data['biography'] = biography;
+    data['status'] = status;
+    data['alignment'] = alignment;
+    data['intelligence'] = intelligence;
+    data['strength'] = strength;
+    data['speed'] = speed;
+    data['durability'] = durability;
+    data['power'] = power;
+    data['combat'] = combat;
+    data['date_created'] = dateCreated;
     return data;
   }
 }
@@ -156,15 +156,15 @@ class VoiceActors {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['age'] = this.age;
-    data['name'] = this.name;
-    data['image'] = this.image;
-    data['date_of_birth'] = this.dateOfBirth;
-    data['date_of_death'] = this.dateOfDeath;
-    data['biography'] = this.biography;
-    data['date_created'] = this.dateCreated;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['age'] = age;
+    data['name'] = name;
+    data['image'] = image;
+    data['date_of_birth'] = dateOfBirth;
+    data['date_of_death'] = dateOfDeath;
+    data['biography'] = biography;
+    data['date_created'] = dateCreated;
     return data;
   }
 }
@@ -198,14 +198,14 @@ class Teams {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    data['tagline'] = this.tagline;
-    data['disbanded'] = this.disbanded;
-    data['history'] = this.history;
-    data['logo'] = this.logo;
-    data['date_created'] = this.dateCreated;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['name'] = name;
+    data['tagline'] = tagline;
+    data['disbanded'] = disbanded;
+    data['history'] = history;
+    data['logo'] = logo;
+    data['date_created'] = dateCreated;
     return data;
   }
 }
@@ -247,18 +247,18 @@ class Staff {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    if (this.position != null) {
-      data['position'] = this.position?.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    if (position != null) {
+      data['position'] = position?.toJson();
     }
-    data['age'] = this.age;
-    data['name'] = this.name;
-    data['image'] = this.image;
-    data['date_of_birth'] = this.dateOfBirth;
-    data['date_of_death'] = this.dateOfDeath;
-    data['biography'] = this.biography;
-    data['date_created'] = this.dateCreated;
+    data['age'] = age;
+    data['name'] = name;
+    data['image'] = image;
+    data['date_of_birth'] = dateOfBirth;
+    data['date_of_death'] = dateOfDeath;
+    data['biography'] = biography;
+    data['date_created'] = dateCreated;
     return data;
   }
 }
@@ -275,9 +275,9 @@ class StaffPosition {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['position'] = this.position;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['position'] = position;
     return data;
   }
 }
@@ -334,24 +334,24 @@ class Issue {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    if (this.characters != null) {
-      data['characters'] = this.characters?.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    if (characters != null) {
+      data['characters'] = characters?.map((v) => v.toJson()).toList();
     }
-    if (this.staff != null) {
-      data['staff'] = this.staff?.map((v) => v.toJson()).toList();
+    if (staff != null) {
+      data['staff'] = staff?.map((v) => v.toJson()).toList();
     }
-    if (this.series != null) {
-      data['series'] = this.series?.toJson();
+    if (series != null) {
+      data['series'] = series?.toJson();
     }
-    data['format'] = this.format;
-    data['issue_number_absolute'] = this.issueNumberAbsolute;
-    data['issue_name'] = this.issueName;
-    data['summary'] = this.summary;
-    data['release_date'] = this.releaseDate;
-    data['cover_image'] = this.coverImage;
-    data['date_created'] = this.dateCreated;
+    data['format'] = format;
+    data['issue_number_absolute'] = issueNumberAbsolute;
+    data['issue_name'] = issueName;
+    data['summary'] = summary;
+    data['release_date'] = releaseDate;
+    data['cover_image'] = coverImage;
+    data['date_created'] = dateCreated;
     return data;
   }
 }
@@ -396,19 +396,19 @@ class Series {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    if (this.publisher != null) {
-      data['publisher'] = this.publisher?.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    if (publisher != null) {
+      data['publisher'] = publisher?.toJson();
     }
-    data['series_name'] = this.seriesName;
-    data['summary'] = this.summary;
-    data['year_started'] = this.yearStarted;
-    data['status'] = this.status;
-    data['cover_image'] = this.coverImage;
-    data['background_image'] = this.backgroundImage;
-    data['rating'] = this.rating;
-    data['date_created'] = this.dateCreated;
+    data['series_name'] = seriesName;
+    data['summary'] = summary;
+    data['year_started'] = yearStarted;
+    data['status'] = status;
+    data['cover_image'] = coverImage;
+    data['background_image'] = backgroundImage;
+    data['rating'] = rating;
+    data['date_created'] = dateCreated;
     return data;
   }
 }
@@ -425,41 +425,9 @@ class Format {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    return data;
-  }
-}
-
-class PublisherResults {
-  int? count;
-  String? next;
-  String? previous;
-  List<Publisher>? results;
-
-  PublisherResults({this.count, this.next, this.previous, this.results});
-
-  PublisherResults.fromJson(Map<String, dynamic> json) {
-    count = json['count'];
-    next = json['next'];
-    previous = json['previous'];
-    if (json['results'] != null) {
-      results = <Publisher>[];
-      json['results'].forEach((v) {
-        results?.add(Publisher.fromJson(v));
-      });
-    }
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['count'] = this.count;
-    data['next'] = this.next;
-    data['previous'] = this.previous;
-    if (this.results != null) {
-      data['results'] = this.results?.map((v) => v.toJson()).toList();
-    }
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['name'] = name;
     return data;
   }
 }
