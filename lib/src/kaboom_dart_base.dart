@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 
-import 'models/auth_models.dart';
-import 'endpoints/comics_endpoint.dart';
+import 'package:kaboom_dart/src/models/auth_models.dart';
+import 'package:kaboom_dart/src/endpoints/comics_endpoint.dart';
 
 class KaboomClient {
   String url = "";

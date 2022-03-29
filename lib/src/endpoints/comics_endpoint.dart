@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 
-import '../models/results.dart';
-import '../models/comics_models.dart';
+import 'package:kaboom_dart/src/models/results.dart';
+import 'package:kaboom_dart/src/models/comics_models.dart';
 
 class ComicsEndpoint {
   String url = "";
