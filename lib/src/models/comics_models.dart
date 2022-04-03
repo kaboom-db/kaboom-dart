@@ -5,7 +5,7 @@ class Publisher {
   String? name;
   String? logo;
   String? website;
-  String? dateCreated;
+  DateTime? dateCreated;
 
   Publisher({this.id, this.name, this.logo, this.website, this.dateCreated});
 
@@ -14,7 +14,7 @@ class Publisher {
     name = json['name'];
     logo = json['logo'];
     website = json['website'];
-    dateCreated = json['date_created'];
+    dateCreated = DateTime.parse(json['date_created']);
   }
 
   Map<String, dynamic> toJson() {
@@ -23,7 +23,7 @@ class Publisher {
     data['name'] = name;
     data['logo'] = logo;
     data['website'] = website;
-    data['date_created'] = dateCreated;
+    data['date_created'] = dateCreated.toString();
     return data;
   }
 
@@ -50,7 +50,7 @@ class Character {
   int? durability;
   int? power;
   int? combat;
-  String? dateCreated;
+  DateTime? dateCreated;
 
   Character(
       {this.id,
@@ -98,7 +98,7 @@ class Character {
     durability = json['durability'];
     power = json['power'];
     combat = json['combat'];
-    dateCreated = json['date_created'];
+    dateCreated = DateTime.parse(json['date_created']);
   }
 
   Map<String, dynamic> toJson() {
@@ -123,103 +123,7 @@ class Character {
     data['durability'] = durability;
     data['power'] = power;
     data['combat'] = combat;
-    data['date_created'] = dateCreated;
-    return data;
-  }
-
-  @override
-  String toString() {
-    return name!;
-  }
-}
-
-class VoiceActors {
-  int? id;
-  int? age;
-  String? name;
-  String? image;
-  String? dateOfBirth;
-  String? dateOfDeath;
-  String? biography;
-  String? dateCreated;
-
-  VoiceActors(
-      {this.id,
-      this.age,
-      this.name,
-      this.image,
-      this.dateOfBirth,
-      this.dateOfDeath,
-      this.biography,
-      this.dateCreated});
-
-  VoiceActors.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    age = json['age'];
-    name = json['name'];
-    image = json['image'];
-    dateOfBirth = json['date_of_birth'];
-    dateOfDeath = json['date_of_death'];
-    biography = json['biography'];
-    dateCreated = json['date_created'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['age'] = age;
-    data['name'] = name;
-    data['image'] = image;
-    data['date_of_birth'] = dateOfBirth;
-    data['date_of_death'] = dateOfDeath;
-    data['biography'] = biography;
-    data['date_created'] = dateCreated;
-    return data;
-  }
-
-  @override
-  String toString() {
-    return name!;
-  }
-}
-
-class Teams {
-  int? id;
-  String? name;
-  String? tagline;
-  int? disbanded;
-  String? history;
-  String? logo;
-  String? dateCreated;
-
-  Teams(
-      {this.id,
-      this.name,
-      this.tagline,
-      this.disbanded,
-      this.history,
-      this.logo,
-      this.dateCreated});
-
-  Teams.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    name = json['name'];
-    tagline = json['tagline'];
-    disbanded = json['disbanded'];
-    history = json['history'];
-    logo = json['logo'];
-    dateCreated = json['date_created'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['name'] = name;
-    data['tagline'] = tagline;
-    data['disbanded'] = disbanded;
-    data['history'] = history;
-    data['logo'] = logo;
-    data['date_created'] = dateCreated;
+    data['date_created'] = dateCreated.toString();
     return data;
   }
 
@@ -238,7 +142,7 @@ class Staff {
   String? dateOfBirth;
   String? dateOfDeath;
   String? biography;
-  String? dateCreated;
+  DateTime? dateCreated;
 
   Staff(
       {this.id,
@@ -262,7 +166,7 @@ class Staff {
     dateOfBirth = json['date_of_birth'];
     dateOfDeath = json['date_of_death'];
     biography = json['biography'];
-    dateCreated = json['date_created'];
+    dateCreated = DateTime.parse(json['date_created']);
   }
 
   Map<String, dynamic> toJson() {
@@ -277,7 +181,7 @@ class Staff {
     data['date_of_birth'] = dateOfBirth;
     data['date_of_death'] = dateOfDeath;
     data['biography'] = biography;
-    data['date_created'] = dateCreated;
+    data['date_created'] = dateCreated.toString();
     return data;
   }
 
@@ -322,7 +226,7 @@ class Issue {
   String? summary;
   String? releaseDate;
   String? coverImage;
-  String? dateCreated;
+  DateTime? dateCreated;
 
   Issue(
       {this.id,
@@ -362,7 +266,7 @@ class Issue {
     summary = json['summary'];
     releaseDate = json['release_date'];
     coverImage = json['cover_image'];
-    dateCreated = json['date_created'];
+    dateCreated = DateTime.parse(json['date_created']);
   }
 
   Map<String, dynamic> toJson() {
@@ -385,7 +289,7 @@ class Issue {
     data['summary'] = summary;
     data['release_date'] = releaseDate;
     data['cover_image'] = coverImage;
-    data['date_created'] = dateCreated;
+    data['date_created'] = dateCreated.toString();
     return data;
   }
 
@@ -405,7 +309,7 @@ class Comic {
   String? coverImage;
   String? backgroundImage;
   double? rating;
-  String? dateCreated;
+  DateTime? dateCreated;
 
   Comic(
       {this.id,
@@ -431,7 +335,7 @@ class Comic {
     coverImage = json['cover_image'];
     backgroundImage = json['background_image'];
     rating = json['rating'];
-    dateCreated = json['date_created'];
+    dateCreated = DateTime.parse(json['date_created']);
   }
 
   Map<String, dynamic> toJson() {
@@ -447,7 +351,7 @@ class Comic {
     data['cover_image'] = coverImage;
     data['background_image'] = backgroundImage;
     data['rating'] = rating;
-    data['date_created'] = dateCreated;
+    data['date_created'] = dateCreated.toString();
     return data;
   }
 
