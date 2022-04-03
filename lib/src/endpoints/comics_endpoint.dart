@@ -7,22 +7,6 @@ class ComicsEndpoint extends Endpoint {
   
   ComicsEndpoint(this.url);
 
-  // Future<Results<Comic>> getComics({Map<String, dynamic> params = const <String, dynamic>{}}) async {
-  //   var uri = Uri.parse(url);
-  //   uri = uri.replace(
-  //     path: '/v1/comics/series/',
-  //     queryParameters: params
-  //   );
-
-  //   var response = await http.get(uri);
-  //   if (response.statusCode == 200) {
-  //     var map = json.decode(response.body);
-  //     return Results<Comic>.fromJson(map, Comic.fromJson);
-  //   } else {
-  //     throw Exception(response.body);
-  //   }
-  // }
-
   // ----------------------- COMICS -----------------------
 
   Future<Results<Comic>> getComics({Map<String, dynamic> params = const <String, dynamic>{}}) async {
@@ -34,10 +18,7 @@ class ComicsEndpoint extends Endpoint {
 
   Future<Comic> addComic(String? accessToken, String comic) async {
     var uri = constructUri(url, "/v1/comics/series/");
-    var headers = {
-      "Authorization": "Token $accessToken",
-      "Content-Type": "application/json"
-    };
+    var headers = constructHeaders(accessToken);
 
     var result = await request("post", uri, Comic.fromJson, headers: headers, body: comic);
     return result as Comic;
@@ -52,10 +33,7 @@ class ComicsEndpoint extends Endpoint {
 
   Future<Comic> updateComic(String? accessToken, int id, String values) async {
     var uri = constructUri(url, "/v1/comics/series/$id/");
-    var headers = {
-      "Authorization": "Token $accessToken",
-      "Content-Type": "application/json"
-    };
+    var headers = constructHeaders(accessToken);
 
     var comic = await request("patch", uri, Comic.fromJson, headers: headers, body: values);
     return comic as Comic;
@@ -72,10 +50,7 @@ class ComicsEndpoint extends Endpoint {
 
   Future<Issue> addIssue(String? accessToken, String issue) async {
     var uri = constructUri(url, "/v1/comics/issues/");
-    var headers = {
-      "Authorization": "Token $accessToken",
-      "Content-Type": "application/json"
-    };
+    var headers = constructHeaders(accessToken);
 
     var result = await request("post", uri, Issue.fromJson, headers: headers, body: issue);
     return result as Issue;
@@ -90,10 +65,7 @@ class ComicsEndpoint extends Endpoint {
 
   Future<Issue> updateIssue(String? accessToken, int id, String values) async {
     var uri = constructUri(url, "/v1/comics/issues/$id/");
-    var headers = {
-      "Authorization": "Token $accessToken",
-      "Content-Type": "application/json"
-    };
+    var headers = constructHeaders(accessToken);
 
     var result = await request("patch", uri, Issue.fromJson, headers: headers, body: values);
     return result as Issue;

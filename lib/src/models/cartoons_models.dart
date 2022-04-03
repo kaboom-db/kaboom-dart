@@ -25,9 +25,9 @@ class Location {
 
 class Cartoon {
   int? id;
-  List<Genres>? genres;
+  List<Genre>? genres;
   Network? network;
-  List<Characters>? characters;
+  List<Character>? characters;
   String? name;
   String? summary;
   int? seasonCount;
@@ -60,17 +60,17 @@ class Cartoon {
   Cartoon.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     if (json['genres'] != null) {
-      genres = <Genres>[];
+      genres = <Genre>[];
       json['genres'].forEach((v) {
-        genres?.add(Genres.fromJson(v));
+        genres?.add(Genre.fromJson(v));
       });
     }
     network =
         json['network'] != null ? Network.fromJson(json['network']) : null;
     if (json['characters'] != null) {
-      characters = <Characters>[];
+      characters = <Character>[];
       json['characters'].forEach((v) {
-        characters?.add(Characters.fromJson(v));
+        characters?.add(Character.fromJson(v));
       });
     }
     name = json['name'];
@@ -113,13 +113,13 @@ class Cartoon {
   }
 }
 
-class Genres {
+class Genre {
   int? id;
   String? genre;
 
-  Genres({this.id, this.genre});
+  Genre({this.id, this.genre});
 
-  Genres.fromJson(Map<String, dynamic> json) {
+  Genre.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     genre = json['genre'];
   }
@@ -160,10 +160,10 @@ class Network {
   }
 }
 
-class Characters {
+class Character {
   int? id;
-  List<VoiceActors>? voiceActors;
-  List<Teams>? teams;
+  List<VoiceActor>? voiceActors;
+  List<Team>? teams;
   Location? locationOfOperation;
   String? name;
   String? alias;
@@ -179,7 +179,7 @@ class Characters {
   int? combat;
   DateTime? dateCreated;
 
-  Characters(
+  Character(
       {this.id,
       this.voiceActors,
       this.teams,
@@ -198,18 +198,18 @@ class Characters {
       this.combat,
       this.dateCreated});
 
-  Characters.fromJson(Map<String, dynamic> json) {
+  Character.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     if (json['voice_actors'] != null) {
-      voiceActors = <VoiceActors>[];
+      voiceActors = <VoiceActor>[];
       json['voice_actors'].forEach((v) {
-        voiceActors?.add(VoiceActors.fromJson(v));
+        voiceActors?.add(VoiceActor.fromJson(v));
       });
     }
     if (json['teams'] != null) {
-      teams = <Teams>[];
+      teams = <Team>[];
       json['teams'].forEach((v) {
-        teams?.add(Teams.fromJson(v));
+        teams?.add(Team.fromJson(v));
       });
     }
     locationOfOperation =
@@ -256,7 +256,7 @@ class Characters {
   }
 }
 
-class VoiceActors {
+class VoiceActor {
   int? id;
   int? age;
   String? name;
@@ -266,7 +266,7 @@ class VoiceActors {
   String? biography;
   DateTime? dateCreated;
 
-  VoiceActors(
+  VoiceActor(
       {this.id,
       this.age,
       this.name,
@@ -276,13 +276,17 @@ class VoiceActors {
       this.biography,
       this.dateCreated});
 
-  VoiceActors.fromJson(Map<String, dynamic> json) {
+  VoiceActor.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     age = json['age'];
     name = json['name'];
     image = json['image'];
-    dateOfBirth = DateTime.parse(json['date_of_birth']);
-    dateOfDeath = DateTime.parse(json['date_of_death']);
+    dateOfBirth = json['date_of_birth'] != null 
+      ? DateTime.parse(json['date_of_birth'])
+      : null;
+    dateOfDeath = json['date_of_death'] != null 
+      ? DateTime.parse(json['date_of_death'])
+      : null;
     biography = json['biography'];
     dateCreated = DateTime.parse(json['date_created']);
   }
@@ -301,7 +305,7 @@ class VoiceActors {
   }
 }
 
-class Teams {
+class Team {
   int? id;
   String? name;
   String? tagline;
@@ -311,7 +315,7 @@ class Teams {
   String? logo;
   DateTime? dateCreated;
 
-  Teams(
+  Team(
       {this.id,
       this.name,
       this.tagline,
@@ -321,7 +325,7 @@ class Teams {
       this.logo,
       this.dateCreated});
 
-  Teams.fromJson(Map<String, dynamic> json) {
+  Team.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     tagline = json['tagline'];
@@ -343,5 +347,58 @@ class Teams {
     data['logo'] = logo;
     data['date_created'] = dateCreated.toString();
     return data;
+  }
+}
+
+class Episode {
+  int? id;
+  Cartoon? series;
+  int? seriesId;
+  int? episodeNumber;
+  int? seasonNumber;
+  String? name;
+  String? summary;
+  String? releaseDate;
+  String? screenshot;
+  DateTime? dateCreated;
+  int? runtime;
+
+  Episode(
+      {this.id,
+      this.series,
+      this.episodeNumber,
+      this.seasonNumber,
+      this.name,
+      this.summary,
+      this.releaseDate,
+      this.screenshot,
+      this.dateCreated,
+      this.runtime});
+
+  Episode.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    series =
+        json['series'] != null ? Cartoon.fromJson(json['series']) : null;
+    episodeNumber = json['episode_number'];
+    seasonNumber = json['season_number'];
+    name = json['name'];
+    summary = json['summary'];
+    releaseDate = json['release_date'];
+    screenshot = json['screenshot'];
+    dateCreated = DateTime.parse(json['date_created']);
+    runtime = json['runtime'];
+  }
+
+  Episode.fromJsonLess(Map<String, dynamic> json) {
+    id = json['id'];
+    seriesId = json['series'];
+    episodeNumber = json['episode_number'];
+    seasonNumber = json['season_number'];
+    name = json['name'];
+    summary = json['summary'];
+    releaseDate = json['release_date'];
+    screenshot = json['screenshot'];
+    dateCreated = DateTime.parse(json['date_created']);
+    runtime = json['runtime'];
   }
 }

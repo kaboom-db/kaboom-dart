@@ -33,114 +33,14 @@ class Publisher {
   }
 }
 
-class Character {
-  int? id;
-  List<VoiceActors>? voiceActors;
-  List<Teams>? teams;
-  Location? locationOfOperation;
-  String? name;
-  String? alias;
-  String? image;
-  String? biography;
-  String? status;
-  String? alignment;
-  int? intelligence;
-  int? strength;
-  int? speed;
-  int? durability;
-  int? power;
-  int? combat;
-  DateTime? dateCreated;
-
-  Character(
-      {this.id,
-      this.voiceActors,
-      this.teams,
-      this.locationOfOperation,
-      this.name,
-      this.alias,
-      this.image,
-      this.biography,
-      this.status,
-      this.alignment,
-      this.intelligence,
-      this.strength,
-      this.speed,
-      this.durability,
-      this.power,
-      this.combat,
-      this.dateCreated});
-
-  Character.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    if (json['voice_actors'] != null) {
-      voiceActors = <VoiceActors>[];
-      json['voice_actors'].forEach((v) {
-        voiceActors?.add(VoiceActors.fromJson(v));
-      });
-    }
-    if (json['teams'] != null) {
-      teams = <Teams>[];
-      json['teams'].forEach((v) {
-        teams?.add(Teams.fromJson(v));
-      });
-    }
-    locationOfOperation = json['location_of_operation'];
-    name = json['name'];
-    alias = json['alias'];
-    image = json['image'];
-    biography = json['biography'];
-    status = json['status'];
-    alignment = json['alignment'];
-    intelligence = json['intelligence'];
-    strength = json['strength'];
-    speed = json['speed'];
-    durability = json['durability'];
-    power = json['power'];
-    combat = json['combat'];
-    dateCreated = DateTime.parse(json['date_created']);
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    if (voiceActors != null) {
-      data['voice_actors'] = voiceActors?.map((v) => v.toJson()).toList();
-    }
-    if (teams != null) {
-      data['teams'] = teams?.map((v) => v.toJson()).toList();
-    }
-    data['location_of_operation'] = locationOfOperation;
-    data['name'] = name;
-    data['alias'] = alias;
-    data['image'] = image;
-    data['biography'] = biography;
-    data['status'] = status;
-    data['alignment'] = alignment;
-    data['intelligence'] = intelligence;
-    data['strength'] = strength;
-    data['speed'] = speed;
-    data['durability'] = durability;
-    data['power'] = power;
-    data['combat'] = combat;
-    data['date_created'] = dateCreated.toString();
-    return data;
-  }
-
-  @override
-  String toString() {
-    return name!;
-  }
-}
-
 class Staff {
   int? id;
   StaffPosition? position;
   int? age;
   String? name;
   String? image;
-  String? dateOfBirth;
-  String? dateOfDeath;
+  DateTime? dateOfBirth;
+  DateTime? dateOfDeath;
   String? biography;
   DateTime? dateCreated;
 
@@ -163,8 +63,12 @@ class Staff {
     age = json['age'];
     name = json['name'];
     image = json['image'];
-    dateOfBirth = json['date_of_birth'];
-    dateOfDeath = json['date_of_death'];
+    dateOfBirth = json['date_of_birth'] != null 
+      ? DateTime.parse(json['date_of_birth'])
+      : null;
+    dateOfDeath = json['date_of_death'] != null 
+      ?DateTime.parse(json['date_of_death'])
+      : null;
     biography = json['biography'];
     dateCreated = DateTime.parse(json['date_created']);
   }
@@ -178,8 +82,8 @@ class Staff {
     data['age'] = age;
     data['name'] = name;
     data['image'] = image;
-    data['date_of_birth'] = dateOfBirth;
-    data['date_of_death'] = dateOfDeath;
+    data['date_of_birth'] = dateOfBirth.toString();
+    data['date_of_death'] = dateOfDeath.toString();
     data['biography'] = biography;
     data['date_created'] = dateCreated.toString();
     return data;

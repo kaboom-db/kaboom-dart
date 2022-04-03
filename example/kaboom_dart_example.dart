@@ -10,6 +10,6 @@ void main() async {
 
   // var body  = "{\"issue_name\": \"New issue name\", \"characters_id\": [1, 2, 3], \"format_id\": \"1\"}";
 
-  var comic = await client.comics?.getStaff(1);
-  print(comic?.dateOfBirth.toString());
+  var t = await client.cartoons?.getGenre(1);
+  print(t?.genre);
 }
