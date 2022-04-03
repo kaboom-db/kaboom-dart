@@ -8,6 +8,8 @@ void main() async {
   print(comic?.seriesName);
   print(comic?.id); */
 
-  var comic = await client.comics?.updateComic(client.accessToken!, 14, {"publisher_id": "1"});
-  print(comic?.publisher?.name);
+  // var body  = "{\"issue_name\": \"New issue name\", \"characters_id\": [1, 2, 3], \"format_id\": \"1\"}";
+
+  var comic = await client.comics?.getFormat(1);
+  print(comic?.name);
 }

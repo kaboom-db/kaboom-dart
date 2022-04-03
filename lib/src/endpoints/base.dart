@@ -3,10 +3,34 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class Endpoint {
+  Map<String, String> constructHeaders(String? accessToken) {
+    if (accessToken != null) {
+      return {
+        "Authorization": "Token $accessToken",
+        "Content-Type": "application/json"
+      };
+    } else {
+      return {
+        "Content-Type": "application/json"
+      };
+    }
+  }
+
+  Uri constructUri(String baseUrl, String path, {Map<String, dynamic>? parameters}) {
+    var uri = Uri.parse(baseUrl);
+    uri = uri.replace(
+      path: path,
+      queryParameters: parameters
+    );
+
+    return uri;
+  }
+
   /// Sends an arbitrary HTTP request.
   /// 
-  /// arg: if the response should be a Results instance, it will need the fromJson function passed to it.
-  Future<dynamic> request(String method, Uri url, Function fromJson, {dynamic arg, Map<String, String> headers = const {}, Map<String, dynamic> body = const {}}) async {
+  /// arg: if the response should be a Results instance, it will need the T.fromJson function passed to it.
+  /// Example: request("get", url, Result<Comic>.fromJson, arg: Comic.fromJson)
+  Future<dynamic> request(String method, Uri url, Function fromJson, {dynamic arg, Map<String, String> headers = const {}, String body = ""}) async {
     switch(method.toLowerCase()) {
       case "get": {
         var response = await http.get(url);

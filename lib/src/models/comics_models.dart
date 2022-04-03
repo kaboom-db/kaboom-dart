@@ -351,9 +351,12 @@ class Issue {
         staff?.add(Staff.fromJson(v));
       });
     }
-    series =
-        json['series'] != null ? Comic.fromJson(json['series']) : null;
-    format = json['format'];
+    series = json['series'] != null 
+      ? Comic.fromJson(json['series']) 
+      : null;
+    format = json['format'] != null
+      ? Format.fromJson(json['format'])
+      : null;
     issueNumberAbsolute = json['issue_number_absolute'];
     issueName = json['issue_name'];
     summary = json['summary'];
@@ -374,7 +377,9 @@ class Issue {
     if (series != null) {
       data['series'] = series?.toJson();
     }
-    data['format'] = format;
+    if (format != null) {
+      data['format'] = format?.toJson();
+    }
     data['issue_number_absolute'] = issueNumberAbsolute;
     data['issue_name'] = issueName;
     data['summary'] = summary;
