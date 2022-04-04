@@ -10,6 +10,8 @@ void main() async {
 
   // var body  = "{\"issue_name\": \"New issue name\", \"characters_id\": [1, 2, 3], \"format_id\": \"1\"}";
 
-  var t = await client.cartoons?.getGenre(1);
-  print(t?.genre);
+  var reportVal = client.accounts?.constructReportValues("comics_Publisher", 1, "This is a test report plz ignore");
+  var t = await client.accounts?.report(client.accessToken, reportVal.toString());
+  print(t?.message);
+  print(t?.status);
 }

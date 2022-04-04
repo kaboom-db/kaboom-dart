@@ -33,7 +33,7 @@ class Endpoint {
   Future<dynamic> request(String method, Uri url, Function fromJson, {dynamic arg, Map<String, String> headers = const {}, String body = ""}) async {
     switch(method.toLowerCase()) {
       case "get": {
-        var response = await http.get(url);
+        var response = await http.get(url, headers: headers);
         if (response.statusCode == 200 || response.statusCode == 201) {
           var map = json.decode(response.body);
           if (arg == null) {

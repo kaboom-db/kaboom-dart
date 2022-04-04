@@ -9,4 +9,4 @@ export 'src/models/cartoons_models.dart';
 export 'src/models/auth_models.dart';
 export 'src/models/results.dart';
 
-// TODO: Export any libraries intended for clients of this package.
+// Export any libraries intended for clients of this package.
