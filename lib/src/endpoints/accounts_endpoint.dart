@@ -56,7 +56,7 @@ class AccountsEndpoint extends Endpoint {
   // ----------------------- IMAGE UPLOADS -----------------------
 
   // This will need a massive rewrite
-  Future<ImageRequest> handleUpload(String accessToken, Uri uri, String filePath, String objectType, int objectId, String requestFields) async {
+  Future<ImageRequest> upload(String accessToken, Uri uri, String filePath, String objectType, int objectId, String requestField) async {
     // Construct the request
     http.MultipartRequest req = http.MultipartRequest("POST", uri);
     req.headers.addAll({
@@ -65,7 +65,7 @@ class AccountsEndpoint extends Endpoint {
     });
     req.fields['object_type'] = objectType;
     req.fields['object_id'] = objectId.toString();
-    req.fields['request_field'] = requestFields;
+    req.fields['request_field'] = requestField;
     File f = File(filePath);
     req.files.add(await http.MultipartFile.fromPath('image', f.path));
     var stream = await req.send();
