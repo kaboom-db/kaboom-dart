@@ -1,6 +1,11 @@
+import 'dart:io';
+import 'dart:convert';
+
 import 'package:kaboom_dart/src/endpoints/base.dart';
 import 'package:kaboom_dart/src/models/accounts_models.dart';
 import 'package:kaboom_dart/src/models/results.dart';
+
+import 'package:http/http.dart' as http;
 
 class AccountsEndpoint extends Endpoint {
   String url = "";
@@ -49,9 +54,27 @@ class AccountsEndpoint extends Endpoint {
   }
 
   // ----------------------- IMAGE UPLOADS -----------------------
-  // how tf do i handle files 
 
-  Future<ImageRequest> upload(String accessToken, String filePath, String values) async {
-    throw Exception("Not implemented ;)");
+  // This will need a massive rewrite
+  Future<ImageRequest> handleUpload(String accessToken, Uri uri, String filePath, String objectType, int objectId, String requestFields) async {
+    // Construct the request
+    http.MultipartRequest req = http.MultipartRequest("POST", uri);
+    req.headers.addAll({
+      'Accept': 'application/json',
+      'Authorization': 'Token $accessToken'
+    });
+    req.fields['object_type'] = objectType;
+    req.fields['object_id'] = objectId.toString();
+    req.fields['request_field'] = requestFields;
+    File f = File(filePath);
+    req.files.add(await http.MultipartFile.fromPath('image', f.path));
+    var stream = await req.send();
+    var response = await http.Response.fromStream(stream);
+    if (response.statusCode == 201) {
+      var map = json.decode(response.body);
+      return ImageRequest.fromJson(map);
+    } else {
+      throw Exception(response.body);
+    }
   }
 }
