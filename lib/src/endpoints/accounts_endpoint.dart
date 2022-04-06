@@ -148,4 +148,40 @@ class AccountsEndpoint extends Endpoint {
     var status = await request("delete", uri, Success.fromJson, headers: headers, body: body);
     return status as Success;
   }
+
+  // ----------------------- CARTOON SUBSCRIPTIONS -----------------------
+
+  Future<Results<CartoonSubscription>> getCartoonSubs(String? accessToken, {Map<String, dynamic> params = const <String, dynamic>{}}) async {
+    var uri = constructUri(url, "/v1/accounts/cartoons/subscriptions/");
+    var headers = constructHeaders(accessToken);
+
+    var results = await request("get", uri, Results<CartoonSubscription>.fromJson, arg: CartoonSubscription.fromJson, headers: headers);
+    return results as Results<CartoonSubscription>;
+  }
+
+  Future<CartoonSubscription> addCartoonSub(String? accessToken, String values) async {
+    var uri = constructUri(url, "/v1/accounts/cartoons/subscriptions/");
+    var headers = constructHeaders(accessToken);
+
+    var sub = await request("post", uri, CartoonSubscription.fromJsonLess, headers: headers, body: values);
+    return sub as CartoonSubscription;
+  }
+
+  Future<Success> removeCartoonSub(String? accessToken, int seriesId) async {
+    var uri = constructUri(url, "/v1/accounts/cartoons/subscriptions/");
+    var headers = constructHeaders(accessToken);
+    String body = "{\"series\": \"$seriesId\"}";
+    
+    var status = await request("delete", uri, Success.fromJson, headers: headers, body: body);
+    return status as Success;
+  }
+
+  Future<CartoonSubscription> rateCartoonSub(String? accessToken, int seriesId, double rating) async {
+    var uri = constructUri(url, "/v1/accounts/cartoons/subscriptions/rate/");
+    var headers = constructHeaders(accessToken);
+    String body = "{\"series\": \"$seriesId\", \"rating\": $rating}";
+
+    var comic = await request("post", uri, CartoonSubscription.fromJsonLess, headers: headers, body: body);
+    return comic as CartoonSubscription;
+  }
 }

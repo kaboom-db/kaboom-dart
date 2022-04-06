@@ -1,3 +1,4 @@
+import 'package:kaboom_dart/src/models/cartoons_models.dart';
 import 'package:kaboom_dart/src/models/comics_models.dart';
 
 class User {
@@ -194,6 +195,36 @@ class ReadIssue {
     userId = json['user'];
     issueId = json['issue'];
     readAt = json['read_at'] != null ? DateTime.parse(json['read_at']) : null;
+  }
+}
+
+class CartoonSubscription {
+  int? id;
+  User? user;
+  int? userId;
+  Cartoon? series;
+  int? seriesId;
+  double? rating;
+  DateTime? dateCreated;
+
+  CartoonSubscription(
+      {this.id, this.user, this.series, this.rating, this.dateCreated});
+
+  CartoonSubscription.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    user = json['user'] != null ? User.fromJson(json['user']) : null;
+    series =
+        json['series'] != null ? Cartoon.fromJson(json['series']) : null;
+    rating = json['rating'];
+    dateCreated = DateTime.parse(json['date_created']);
+  }
+
+  CartoonSubscription.fromJsonLess(Map<String, dynamic> json) {
+    id = json['id'];
+    userId = json['user'];
+    seriesId = json['series'];
+    rating = json['rating'];
+    dateCreated = json['date_created'] != null ? DateTime.parse(json['date_created']) : null;
   }
 }
 
