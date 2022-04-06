@@ -1,3 +1,5 @@
+import 'package:kaboom_dart/src/models/comics_models.dart';
+
 class User {
   String? username;
   int? id;
@@ -136,6 +138,52 @@ class ImageRequest {
     data['object_id'] = objectId;
     data['status'] = status;
     data['user'] = user;
+    return data;
+  }
+}
+
+class ComicSubscription {
+  int? id;
+  User? user;
+  int? userId;
+  Comic? series;
+  int? seriesId;
+  double? rating;
+  String? dateCreated;
+
+  ComicSubscription(
+      {this.id, this.user, this.series, this.rating, this.dateCreated});
+
+  ComicSubscription.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    user = json['user'] != null ? User.fromJson(json['user']) : null;
+    series =
+        json['series'] != null ? Comic.fromJson(json['series']) : null;
+    rating = json['rating'];
+    dateCreated = json['date_created'];
+  }
+
+  ComicSubscription.fromJsonLess(Map<String, dynamic> json) {
+    id = json['id'];
+    userId = json['user'];
+    seriesId = json['series'];
+    rating = json['rating'];
+    dateCreated = json['date_created'];
+  }
+}
+
+class Success {
+  String? success;
+
+  Success({this.success});
+
+  Success.fromJson(Map<String, dynamic> json) {
+    success = json['success'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['success'] = success;
     return data;
   }
 }

@@ -67,8 +67,13 @@ class Endpoint {
       }
 
       case "delete": {
-        // Not yet implemented
-        throw Exception("Not implemented");
+        var response = await http.delete(url, headers: headers, body: body);
+        if (response.statusCode == 200 || response.statusCode == 201) {
+          var map = json.decode(response.body);
+          return fromJson(map);
+        } else {
+          throw Exception(response.body);
+        }
       }
     }
   }

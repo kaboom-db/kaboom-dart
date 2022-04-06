@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:kaboom_dart/src/endpoints/base.dart';
 import 'package:kaboom_dart/src/models/accounts_models.dart';
 import 'package:kaboom_dart/src/models/results.dart';
-import 'package:kaboom_dart/src/options.dart';
 
 import 'package:http/http.dart' as http;
 
@@ -40,7 +39,7 @@ class AccountsEndpoint extends Endpoint {
 
   // ----------------------- REPORTS -----------------------
 
-  String constructReportValues(ReportOptions objectType, int objectId, String message) {
+  String constructReportValues(String objectType, int objectId, String message) {
     return "{\"object_type\": \"$objectType\", \"object_id\": $objectId, \"message\": \"$message\"}";
   }
 
@@ -76,5 +75,41 @@ class AccountsEndpoint extends Endpoint {
     } else {
       throw Exception(response.body);
     }
+  }
+
+  // ----------------------- COMIC SUBSCRIPTIONS -----------------------
+
+  Future<Results<ComicSubscription>> getComicSubs(String? accessToken, {Map<String, dynamic> params = const <String, dynamic>{}}) async {
+    var uri = constructUri(url, "/v1/accounts/comics/subscriptions/");
+    var headers = constructHeaders(accessToken);
+
+    var results = await request("get", uri, Results<ComicSubscription>.fromJson, arg: ComicSubscription.fromJson, headers: headers);
+    return results as Results<ComicSubscription>;
+  }
+
+  Future<ComicSubscription> addComicSub(String? accessToken, String values) async {
+    var uri = constructUri(url, "/v1/accounts/comics/subscriptions/");
+    var headers = constructHeaders(accessToken);
+
+    var sub = await request("post", uri, ComicSubscription.fromJsonLess, headers: headers, body: values);
+    return sub as ComicSubscription;
+  }
+
+  Future<Success> removeComicSub(String? accessToken, int seriesId) async {
+    var uri = constructUri(url, "/v1/accounts/comics/subscriptions/");
+    var headers = constructHeaders(accessToken);
+    String body = "{\"series\": \"$seriesId\"}";
+    
+    var status = await request("delete", uri, Success.fromJson, headers: headers, body: body);
+    return status as Success;
+  }
+
+  Future<ComicSubscription> rateComicSub(String? accessToken, int seriesId, double rating) async {
+    var uri = constructUri(url, "/v1/accounts/comics/subscriptions/rate/");
+    var headers = constructHeaders(accessToken);
+    String body = "{\"series\": \"$seriesId\", \"rating\": $rating}";
+
+    var comic = await request("post", uri, ComicSubscription.fromJsonLess, headers: headers, body: body);
+    return comic as ComicSubscription;
   }
 }

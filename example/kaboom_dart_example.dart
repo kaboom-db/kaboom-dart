@@ -10,6 +10,6 @@ void main() async {
 
   // var body  = "{\"issue_name\": \"New issue name\", \"characters_id\": [1, 2, 3], \"format_id\": \"1\"}";
 
-  var t = await client.accounts?.upload(client.accessToken.toString(), "/home/crxssed/projectstmp/kaboom-dart/example/test.jpeg", ImageRequestOptions.PUBLISHER, 1, ImageRequestFields.LOGO);
-  print(t?.image);
+  var t = await client.accounts?.rateComicSub(client.accessToken, 2, 6);
+  print(t?.seriesId);
 }
