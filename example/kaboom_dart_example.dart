@@ -6,6 +6,6 @@ void main() async {
 
   // var body  = "{\"issue_name\": \"New issue name\", \"characters_id\": [1, 2, 3], \"format_id\": \"1\"}";
 
-  var t = await client.accounts?.rateCartoonSub(client.accessToken, 2, 5);
-  print(t?.id);
+  var t = await client.accounts?.cleanWatchedEpisode(client.accessToken, 42);
+  print(t?.success);
 }

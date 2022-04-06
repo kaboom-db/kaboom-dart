@@ -184,4 +184,40 @@ class AccountsEndpoint extends Endpoint {
     var comic = await request("post", uri, CartoonSubscription.fromJsonLess, headers: headers, body: body);
     return comic as CartoonSubscription;
   }
+
+  // ----------------------- WATCHED EPISODES -----------------------
+
+  Future<Results<WatchedEpisode>> getWatchedEpisodes(String? accessToken, {Map<String, dynamic> params = const <String, dynamic>{}}) async {
+    var uri = constructUri(url, "/v1/accounts/cartoons/episodes/");
+    var headers = constructHeaders(accessToken);
+
+    var results = await request("get", uri, Results<WatchedEpisode>.fromJson, arg: WatchedEpisode.fromJson, headers: headers);
+    return results as Results<WatchedEpisode>;
+  }
+
+  Future<WatchedEpisode> addWatchedEpisode(String? accessToken, String values) async {
+    var uri = constructUri(url, "/v1/accounts/cartoons/episodes/");
+    var headers = constructHeaders(accessToken);
+
+    var ri = await request("post", uri, WatchedEpisode.fromJsonLess, headers: headers, body: values);
+    return ri as WatchedEpisode;
+  }
+
+  Future<Success> removeWatchedEpisode(String? accessToken, int watchedEpisodeId) async {
+    var uri = constructUri(url, "/v1/accounts/cartoons/episodes/");
+    var headers = constructHeaders(accessToken);
+    String body = "{\"watched_id\": \"$watchedEpisodeId\"}";
+    
+    var status = await request("delete", uri, Success.fromJson, headers: headers, body: body);
+    return status as Success;
+  }
+
+  Future<Success> cleanWatchedEpisode(String? accessToken, int episodeId) async {
+    var uri = constructUri(url, "/v1/accounts/cartoons/episodes/clean/");
+    var headers = constructHeaders(accessToken);
+    String body = "{\"episode\": \"$episodeId\"}";
+    
+    var status = await request("delete", uri, Success.fromJson, headers: headers, body: body);
+    return status as Success;
+  }
 }

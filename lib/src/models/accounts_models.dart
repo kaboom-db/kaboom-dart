@@ -228,6 +228,32 @@ class CartoonSubscription {
   }
 }
 
+class WatchedEpisode {
+  int? id;
+  User? user;
+  int? userId;
+  Episode? episode;
+  int? episodeId;
+  DateTime? watchedAt;
+
+  WatchedEpisode({this.id, this.user, this.episode, this.watchedAt});
+
+  WatchedEpisode.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    user = json['user'] != null ? User.fromJson(json['user']) : null;
+    episode =
+        json['episode'] != null ? Episode.fromJson(json['episode']) : null;
+    watchedAt = json['watched_at'] != null ? DateTime.parse(json['watched_at']) : null;
+  }
+
+  WatchedEpisode.fromJsonLess(Map<String, dynamic> json) {
+    id = json['id'];
+    userId = json['user'];
+    episodeId = json['episode'];
+    watchedAt = json['watched_at'] != null ? DateTime.parse(json['watched_at']) : null;
+  }
+}
+
 class Success {
   String? success;
 
