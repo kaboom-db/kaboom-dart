@@ -1,9 +1,9 @@
-import 'dart:io';
 import 'dart:convert';
 
 import 'package:kaboom_dart/src/endpoints/base.dart';
 import 'package:kaboom_dart/src/models/accounts_models.dart';
 import 'package:kaboom_dart/src/models/results.dart';
+import 'package:kaboom_dart/src/options.dart';
 
 import 'package:http/http.dart' as http;
 
@@ -40,8 +40,7 @@ class AccountsEndpoint extends Endpoint {
 
   // ----------------------- REPORTS -----------------------
 
-  // Issue: #1
-  String constructReportValues(String objectType, int objectId, String message) {
+  String constructReportValues(ReportOptions objectType, int objectId, String message) {
     return "{\"object_type\": \"$objectType\", \"object_id\": $objectId, \"message\": \"$message\"}";
   }
 
@@ -55,20 +54,21 @@ class AccountsEndpoint extends Endpoint {
 
   // ----------------------- IMAGE UPLOADS -----------------------
 
-  // This will need a massive rewrite
-  Future<ImageRequest> upload(String accessToken, Uri uri, String filePath, String objectType, int objectId, String requestField) async {
+  Future<ImageRequest> upload(String accessToken, String filePath, String objectType, int objectId, String requestField) async {
+    var uri = constructUri(url, "/v1/accounts/upload/");
+    var headers = constructHeaders(accessToken);
+    
     // Construct the request
     http.MultipartRequest req = http.MultipartRequest("POST", uri);
-    req.headers.addAll({
-      'Accept': 'application/json',
-      'Authorization': 'Token $accessToken'
-    });
+    req.headers.addAll(headers);
     req.fields['object_type'] = objectType;
     req.fields['object_id'] = objectId.toString();
     req.fields['request_field'] = requestField;
-    File f = File(filePath);
-    req.files.add(await http.MultipartFile.fromPath('image', f.path));
+    req.files.add(await http.MultipartFile.fromPath('image', filePath));
+
+    // Send the request
     var stream = await req.send();
+
     var response = await http.Response.fromStream(stream);
     if (response.statusCode == 201) {
       var map = json.decode(response.body);
