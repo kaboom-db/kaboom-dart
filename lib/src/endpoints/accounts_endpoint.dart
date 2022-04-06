@@ -112,4 +112,40 @@ class AccountsEndpoint extends Endpoint {
     var comic = await request("post", uri, ComicSubscription.fromJsonLess, headers: headers, body: body);
     return comic as ComicSubscription;
   }
+
+  // ----------------------- READ ISSUES -----------------------
+
+  Future<Results<ReadIssue>> getReadIssues(String? accessToken, {Map<String, dynamic> params = const <String, dynamic>{}}) async {
+    var uri = constructUri(url, "/v1/accounts/comics/readissues/");
+    var headers = constructHeaders(accessToken);
+
+    var results = await request("get", uri, Results<ReadIssue>.fromJson, arg: ReadIssue.fromJson, headers: headers);
+    return results as Results<ReadIssue>;
+  }
+
+  Future<ReadIssue> addReadIssue(String? accessToken, String values) async {
+    var uri = constructUri(url, "/v1/accounts/comics/readissues/");
+    var headers = constructHeaders(accessToken);
+
+    var ri = await request("post", uri, ReadIssue.fromJsonLess, headers: headers, body: values);
+    return ri as ReadIssue;
+  }
+
+  Future<Success> removeReadIssue(String? accessToken, int readIssueId) async {
+    var uri = constructUri(url, "/v1/accounts/comics/readissues/");
+    var headers = constructHeaders(accessToken);
+    String body = "{\"read_id\": \"$readIssueId\"}";
+    
+    var status = await request("delete", uri, Success.fromJson, headers: headers, body: body);
+    return status as Success;
+  }
+
+  Future<Success> cleanReadIssue(String? accessToken, int issueId) async {
+    var uri = constructUri(url, "/v1/accounts/comics/readissues/clean/");
+    var headers = constructHeaders(accessToken);
+    String body = "{\"issue\": \"$issueId\"}";
+    
+    var status = await request("delete", uri, Success.fromJson, headers: headers, body: body);
+    return status as Success;
+  }
 }

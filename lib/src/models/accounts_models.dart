@@ -149,7 +149,7 @@ class ComicSubscription {
   Comic? series;
   int? seriesId;
   double? rating;
-  String? dateCreated;
+  DateTime? dateCreated;
 
   ComicSubscription(
       {this.id, this.user, this.series, this.rating, this.dateCreated});
@@ -160,7 +160,7 @@ class ComicSubscription {
     series =
         json['series'] != null ? Comic.fromJson(json['series']) : null;
     rating = json['rating'];
-    dateCreated = json['date_created'];
+    dateCreated = DateTime.parse(json['date_created']);
   }
 
   ComicSubscription.fromJsonLess(Map<String, dynamic> json) {
@@ -168,7 +168,32 @@ class ComicSubscription {
     userId = json['user'];
     seriesId = json['series'];
     rating = json['rating'];
-    dateCreated = json['date_created'];
+    dateCreated = json['date_created'] != null ? DateTime.parse(json['date_created']) : null;
+  }
+}
+
+class ReadIssue {
+  int? id;
+  User? user;
+  int? userId;
+  Issue? issue;
+  int? issueId;
+  DateTime? readAt;
+
+  ReadIssue({this.id, this.user, this.issue, this.readAt});
+
+  ReadIssue.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    user = json['user'] != null ? User.fromJson(json['user']) : null;
+    issue = json['issue'] != null ? Issue.fromJson(json['issue']) : null;
+    readAt = json['read_at'] != null ? DateTime.parse(json['read_at']) : null;
+  }
+
+  ReadIssue.fromJsonLess(Map<String, dynamic> json) {
+    id = json['id'];
+    userId = json['user'];
+    issueId = json['issue'];
+    readAt = json['read_at'] != null ? DateTime.parse(json['read_at']) : null;
   }
 }
 
