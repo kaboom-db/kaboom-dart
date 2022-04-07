@@ -7,9 +7,8 @@ void main() async {
 
   // var body  = "{\"issue_name\": \"New issue name\", \"characters_id\": [1, 2, 3], \"format_id\": \"1\"}";
 
-  var t = await client.social?.feedComics(accessToken);
+  var t = await client.comics?.getComics(params: {"query": "venom"});
   t?.results?.forEach((element) {
-    print(element.series?.seriesName);
-    print(element.user?.username);
+    print(element.seriesName);
   });
 }
