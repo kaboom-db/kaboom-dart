@@ -6,6 +6,7 @@ import 'package:kaboom_dart/src/models/auth_models.dart';
 import 'package:kaboom_dart/src/endpoints/comics_endpoint.dart';
 import 'package:kaboom_dart/src/endpoints/cartoons_endpoint.dart';
 import 'package:kaboom_dart/src/endpoints/accounts_endpoint.dart';
+import 'package:kaboom_dart/src/endpoints/social_endpoint.dart';
 
 class KaboomClient {
   String url = "";
@@ -13,11 +14,13 @@ class KaboomClient {
   ComicsEndpoint? comics;
   CartoonsEndpoint? cartoons;
   AccountsEndpoint? accounts;
+  SocialEndpoint? social;
 
   KaboomClient({this.url = "https://staging-kaboom.herokuapp.com"}) {
     comics = ComicsEndpoint(url);
     cartoons = CartoonsEndpoint(url);
     accounts = AccountsEndpoint(url);
+    social = SocialEndpoint(url);
   }
 
   /// Logs a user in. Also saves the token in accessToken for future use.
